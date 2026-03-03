@@ -1,21 +1,32 @@
 import os
 from pathlib import Path
+import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# ==============================
-# Security
-# ==============================
+# =====================================================
+# SECURITY
+# =====================================================
 
-SECRET_KEY = os.getenv("SECRET_KEY", "dev-secret-key")
+SECRET_KEY = os.getenv("SECRET_KEY")
 
-DEBUG = os.getenv("DEBUG", "True") == "True"
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
 
-# ==============================
-# Applications
-# ==============================
+# Render runs behind proxy
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Production Security
+SECURE_SSL_REDIRECT = not DEBUG
+SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = not DEBUG
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# =====================================================
+# APPLICATIONS
+# =====================================================
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -32,10 +43,14 @@ INSTALLED_APPS = [
     'attendance',
 ]
 
+# =====================================================
+# MIDDLEWARE
+# =====================================================
+
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
-
     'django.middleware.security.SecurityMiddleware',
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -47,9 +62,9 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'config.urls'
 WSGI_APPLICATION = 'config.wsgi.application'
 
-# ==============================
-# Templates
-# ==============================
+# =====================================================
+# TEMPLATES
+# =====================================================
 
 TEMPLATES = [
     {
@@ -67,15 +82,9 @@ TEMPLATES = [
     },
 ]
 
-# ==============================
-# CORS
-# ==============================
-
-CORS_ALLOW_ALL_ORIGINS = True
-
-# ==============================
-# Database (Render + Local)
-# ==============================
+# =====================================================
+# DATABASE (RENDER POSTGRESQL)
+# =====================================================
 
 DATABASES = {
     "default": dj_database_url.config(
@@ -85,9 +94,9 @@ DATABASES = {
     )
 }
 
-# ==============================
-# REST Framework
-# ==============================
+# =====================================================
+# REST FRAMEWORK
+# =====================================================
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
@@ -98,11 +107,21 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
 }
 
-# ==============================
-# Static Files
-# ==============================
+# =====================================================
+# CORS
+# =====================================================
 
-STATIC_URL = 'static/'
+CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "").split(",")
+
+# If using cookies/auth:
+CORS_ALLOW_CREDENTIALS = True
+
+# =====================================================
+# STATIC FILES
+# =====================================================
+
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
