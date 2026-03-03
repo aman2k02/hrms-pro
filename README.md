@@ -3,13 +3,13 @@
 ## 🚀 Live Application
 
 ### 🌐 Frontend (Vercel)
-https://hrms-lite-one-rho.vercel.app/
+https://aman2k02-hrms-lite.vercel.app/
 
 ### 🔧 Backend API (Render)
-https://hrms-backend-0r61.onrender.com/
+https://hrms-pro-pq2e.onrender.com/
 
 ### 📦 GitHub Repository
-https://github.com/amanvrma798-sys/hrms-lite
+https://github.com/aman2k02/hrms-pro/
 
 ---
 
@@ -115,7 +115,7 @@ This gives a quick operational overview of workforce attendance.
 Base URL:
 
 ```
-https://hrms-backend-0r61.onrender.com/api/
+https://hrms-pro-pq2e.onrender.com/api/
 ```
 
 ### 📌 Employees
@@ -128,8 +128,8 @@ DELETE /api/employees/{id}/
 
 Live:
 
-- https://hrms-backend-0r61.onrender.com/api/employees/
-- https://hrms-backend-0r61.onrender.com/api/employees/{id}/
+- https://hrms-pro-pq2e.onrender.com/api/employees/
+- https://hrms-pro-pq2e.onrender.com/api/employees/{id}/
 
 ---
 
@@ -143,9 +143,9 @@ GET    /api/attendance/dashboard/
 
 Live:
 
-- https://hrms-backend-0r61.onrender.com/api/attendance/
-- https://hrms-backend-0r61.onrender.com/api/attendance/list/?employee_id=EMP001
-- https://hrms-backend-0r61.onrender.com/api/attendance/dashboard/
+- https://hrms-pro-pq2e.onrender.com/api/attendance/
+- https://hrms-pro-pq2e.onrender.com/api/attendance/list/?employee_id=EMP001
+- https://hrms-pro-pq2e.onrender.com/api/attendance/dashboard/
 
 ---
 
